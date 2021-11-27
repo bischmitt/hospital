@@ -1,26 +1,56 @@
-
 {{>navAdmin}}
-<div class=" container center mt-5">
-    <form>
+<section class=" container text-center w-25 my-5">
+    <form action="/addMedico" method="post">
         <h3 class="text-primary mt-3"><b>Cadastrar Médico</b></h3>
-        <div class="form-row form-control">
-            <div class="col mt-3">
-                <input type="text" class="form-control border-primary" name="nomeMedico" id="nomeMedico" placeholder="Nome completo do médico" />
-            </div>
-            <div class="col mt-3">
-                <input type="text" class="form-control border-primary" name="endereco" id="endereco" placeholder="Endereço do médico" />
-            </div>
-            <div class="col mt-3">
-                <input type="text" class="form-control border-primary" name="nomeMedico" id="nomeMedico" placeholder="Especialidade do médico" />
-            </div>
-            <div class="col mt-3">
-                <input type="text" class="form-control border-primary" name="nomeMedico" id="nomeMedico" placeholder="CRM 00000000-0/BR" />
-            </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-primary border-end-0 bg-light"><i
+                            class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control border-primary border-start-0" name="nomeMedico"
+                        id="nomeMedico" placeholder="Nome completo do médico" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-primary border-end-0 bg-light"><i class="bi bi-123"></i></span>
+                    <input type="number" class="form-control border-primary border-start-0" name="cpf" id="cpf"
+                        placeholder="CPF do médico 00000000000" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-primary border-end-0 bg-light"><i
+                            class="bi bi-geo-fill"></i></span>
+                    <input type="text" class="form-control border-primary border-start-0" name="endereco" id="endereco"
+                        placeholder="Endereço do médico" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-primary border-end-0 bg-light"><i
+                            class="bi bi-suit-heart-fill"></i></span>
+                    <input type="text" class="form-control border-primary border-start-0" name="especialidade"
+                        id="especialidade" placeholder="Especialidade do médico" required />
+                    {{!-- Aqui devemos articular com a base de dados da collection especialidade --}}
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-primary border-end-0 bg-light"><i
+                            class="bi bi-person-badge-fill"></i></span>
+                    <input type="text" class="form-control border-primary border-start-0" name="crm" id="crm"
+                        placeholder="CRM 00000000-0/UF do médico" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-primary border-end-0 bg-light"><i
+                            class="bi bi-currency-dollar"></i></span>
+                    <input type="number" class="form-control border-primary border-start-0" name="salario" id="salario"
+                        placeholder="Salário em R$00,00 do médico" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-primary border-end-0 bg-light"><i
+                            class="bi bi-cash"></i></span>
+                    <input type="number" class="form-control border-primary border-start-0" name="precoConsulta"
+                        id="precoConsulta" placeholder="Preço em R$00,00 da consulta" required />
+                </div>
+                <button type="reset" class="btn btn-outline-primary mt-3">Limpar</button>
+                <button type="submit" class="btn btn-primary mt-3">Salvar</button>
 
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary mt-3">Enviar</button>
-        <button type="reset" class="btn btn-outline-primary mt-3">Limpar</button>
     </form>
 
-    </div>
+</section>
