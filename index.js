@@ -7,6 +7,7 @@ const exphbs = require('express-handlebars')
 const hbs = exphbs.create({
     partialsDir: 'views/partials',
 });
+const ObjectId = require('mongodb').ObjectId; 
 
 app.engine('handlebars',hbs.engine)
 app.set('view engine','handlebars')
@@ -25,7 +26,7 @@ app.get('/cadastrarMedico', (req, res) => {
 
 app.post('/addMedico', (req,res)=>{
     const novoMedico = {
-        nome: req.body.nomeMedico,
+        nomeMedico: req.body.nomeMedico,
         cpf: req.body.cpf,
         celular: req.body.celular,
         email: req.body.email,
@@ -45,6 +46,7 @@ app.post('/addMedico', (req,res)=>{
 app.get('/cadastrarUsuario', (req, res) => {
     res.render('cadastrarUsuario')
 })
+
 app.post('/addUsuario', (req,res)=>{
     const novoUsuario = {
         nome: req.body.nomeUsuario,
@@ -63,9 +65,10 @@ app.post('/addUsuario', (req,res)=>{
     })
 })
 
-app.get('/cadastrarEspecialidade', (req,res)=>{
+app.get('/cadastrarEspecialidade', (req, res) => {
     res.render('cadastrarEspecialidade')
 })
+
 app.post('/addEspecialidade',(req,res)=>{
     const novaEspecialidade = {
         especialidade: req.body.especialidade,
@@ -81,7 +84,43 @@ app.get('/login', (req,res)=>{
 })
 
 app.get('/listarMedico', (req,res)=>{
-    res.render('listarMedico')
+    dbo.collection('medicos').find({}).toArray((erro,resultado)=>{
+        if(erro)throw erro
+        res.render('listarMedico', {resultado})
+    })
+})
+
+app.get('/listarMedicoAdmin', (req,res)=>{
+    dbo.collection('medicos').find({}).toArray((erro,resultado)=>{
+        if(erro)throw erro
+        res.render('listarMedicoAdmin', {resultado})
+    })
+})
+
+app.get('/listarEspecialidade', (req,res)=>{
+    dbo.collection('especialidades').find({}).toArray((erro,resultado)=>{
+        if(erro)throw erro
+        res.render('listarEspecialidade', {resultado})
+    })
+})
+
+app.get('/deletarMedico/:id', (req,res)=>{
+    let idMedico = req.params.id
+    let obj_id = new ObjectId(idMedico)
+    dbo.collection('medicos').deleteOne({_id:obj_id}, (erro, resultado)=>{
+        if(erro)throw erro
+        res.redirect('/listarMedicoAdmin')
+    })   
+})
+
+app.get('/deletarEspecialidade/:id', (req,res)=>{
+    let idEspecialidade = req.params.id
+    let obj_id = new ObjectId(idEspecialidade)  
+    dbo.collection('especialidades').deleteOny({_id:obj_id}, (erro, resultado)=>{
+        if(erro)throw erro
+        res.redirect('/listarEspecialidade')
+    })
+    
 })
 
 

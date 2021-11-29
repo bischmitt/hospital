@@ -1,0 +1,9 @@
+medico.nomeMedico = req.body.nomeMedico
+    medico.cpf = req.body.cpf
+    medico.celular =  req.body.celular
+    medico.email = req.body.email
+    medico.cpf = req.body.cpf
+    medico.especialidade = req.body.especialidade
+    medico.crm = req.body.crm
+    medico.salario = req.body.salario
+    medico.precoConsulta = req.body.precoConsulta

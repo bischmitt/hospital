@@ -1,0 +1,66 @@
+
+{{>navAdmin}}
+<section class=" container text-center w-25 my-5">
+    <form action="/editarMedico" method="post">
+        <h3 class="text-success mt-3"><b>Editar Médico</b></h3>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 "><i
+                            class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="nomeMedico"
+                        id="nomeMedico" placeholder="Nome completo do médico"required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-123"></i></span>
+                    <input type="number" class="form-control border-success border-start-0" name="cpf" id="cpf"
+                        placeholder="CPF do médico 00000000000" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-phone-vibrate-fill"></i></span>
+                    <input type="number" class="form-control border-success border-start-0" name="celular" id="celular"
+                        placeholder="Celular do médico (00)000000000" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control border-success border-start-0" name="email" id="email"
+                        placeholder="Email do médico" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-geo-fill"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="endereco" id="endereco"
+                        placeholder="Endereço do médico" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-suit-heart-fill"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="especialidade"
+                        id="especialidade" placeholder="Especialidade do médico" required />
+                    {{!-- Aqui devemos articular com a base de dados da collection especialidade. Sugiro puxar da collection especialidades este campo, via select --}}
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-person-badge-fill"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="crm" id="crm"
+                        placeholder="CRM do médico 00000000-0/UF " required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-currency-dollar"></i></span>
+                    <input type="number" class="form-control border-success border-start-0" name="salario" id="salario"
+                        placeholder="Salário do médico em R$00,00" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-cash"></i></span>
+                    <input type="number" class="form-control border-success border-start-0" name="precoConsulta"
+                        id="precoConsulta" placeholder="Preço da consulta em R$00,00" required />
+                </div>
+                 <input type="hidden" name="id" value="{{medico_item._id}}">
+                <button type="reset" class="btn btn-outline-success mt-3">Limpar</button>
+                <button type="submit" class="btn btn-success mt-3">Salvar</button>
+
+            </div>
+        </div>
+    </form>
