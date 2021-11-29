@@ -20,8 +20,11 @@ app.use(express.static(__dirname + '/public'))
 app.get('/',(req,res)=>{
     res.render('home')
 })
+
+/* AQUI COMEÇA O CRUD DO CADASTRAR MÉDICO */
 app.get('/cadastrarMedico', (req, res) => {
-    res.render('cadastrarMedico')
+    let acao = 'Cadastrar'
+    res.render('cadastrarMedico',{acao})
 })
 
 app.post('/addMedico', (req,res)=>{
@@ -36,12 +39,89 @@ app.post('/addMedico', (req,res)=>{
         salario: req.body.salario,
         precoConsulta: req.body.precoConsulta
     }
+    
+    if(req.body.idMedico == ""){
     dbo.collection('medicos').insertOne(novoMedico,(erro,resultado)=>{
         if(erro) throw erro
         console.log("Um médico foi cadastrado!")
         res.redirect('/cadastrarMedico')
     })
+    }else{
+        const idMedico = req.body.idMedico
+        const objMedico = new ObjectId(idMedico)
+        dbo.collection('medicos').findOneAndReplace(
+            {_id:objMedico},
+            novoMedico,
+            (erro,resultado)=>{
+                if(erro)throw erro
+            })
+            res.redirect('/listarMedicoAdmin')
+    }
 })
+
+app.get('/listarMedicoAdmin', (req,res)=>{
+    dbo.collection('medicos').find({}).toArray((erro,resultado)=>{
+        if(erro)throw erro
+        res.render('listarMedicoAdmin', {resultado})
+    })
+})
+
+app.get('/deletarMedico/:id', (req,res)=>{
+    let idMedico = req.params.id
+    let obj_id = new ObjectId(idMedico)
+    dbo.collection('medicos').deleteOne({_id:obj_id}, (erro, resultado)=>{
+        if(erro)throw erro
+        res.redirect('/listarMedicoAdmin')
+    })
+})
+
+app.get('/editarMedico/:id',(req,res)=>{
+    const idMedico = req.params.id
+    const obj_id = new ObjectId(idMedico)
+    let acao = "Salvar"
+    dbo.collection('medicos').findOne({_id: obj_id},(erro,resultado)=>{
+        if(erro)throw erro
+        res.render('cadastrarMedico', {resultado,acao})
+    })
+})
+/* AQUI TERMINA O CRUD DE CADASTRAR MÉDICO */
+
+
+/* AQUI COMEÇA O CRUD DE CADASTRAR ESPECIALIDADE */
+app.get('/cadastrarEspecialidade', (req, res) => {
+    res.render('cadastrarEspecialidade')
+})
+
+app.post('/addEspecialidade',(req,res)=>{
+    const novaEspecialidade = {
+        especialidade: req.body.especialidade,
+    }
+    dbo.collection('especialidades').insertOne(novaEspecialidade, (erro,resultado)=>{
+        if(erro)throw erro
+        console.log('Uma especialidade foi cadastrada!')
+    })
+})
+
+app.get('/listarEspecialidade', (req,res)=>{
+    dbo.collection('especialidades').find({}).toArray((erro,resultado)=>{
+        if(erro)throw erro
+        res.render('listarEspecialidade', {resultado})
+    })
+})
+
+app.get('/deletarEspecialidade/:id', (req,res)=>{
+    let idEspecialidade = req.params.id
+    let obj_id = new ObjectId(idEspecialidade)  
+    dbo.collection('especialidades').deleteOne({_id:obj_id}, (erro, resultado)=>{
+        if(erro)throw erro
+        res.redirect('/listarEspecialidade')
+    })
+    
+})
+
+
+/* AQUI TERMINA O CRUD DE CADASTRAR ESPECIALIDADE */
+
 
 app.get('/cadastrarUsuario', (req, res) => {
     res.render('cadastrarUsuario')
@@ -65,24 +145,6 @@ app.post('/addUsuario', (req,res)=>{
     })
 })
 
-app.get('/cadastrarEspecialidade', (req, res) => {
-    res.render('cadastrarEspecialidade')
-})
-
-app.post('/addEspecialidade',(req,res)=>{
-    const novaEspecialidade = {
-        especialidade: req.body.especialidade,
-    }
-    dbo.collection('especialidades').insertOne(novaEspecialidade, (erro,resultado)=>{
-        if(erro)throw erro
-        console.log('Uma especialidade foi cadastrada!')
-    })
-})
-
-app.get('/login', (req,res)=>{
-    res.render('login')
-})
-
 app.get('/listarMedico', (req,res)=>{
     dbo.collection('medicos').find({}).toArray((erro,resultado)=>{
         if(erro)throw erro
@@ -90,38 +152,10 @@ app.get('/listarMedico', (req,res)=>{
     })
 })
 
-app.get('/listarMedicoAdmin', (req,res)=>{
-    dbo.collection('medicos').find({}).toArray((erro,resultado)=>{
-        if(erro)throw erro
-        res.render('listarMedicoAdmin', {resultado})
-    })
+app.get('/login', (req,res)=>{
+    res.render('login')
 })
 
-app.get('/listarEspecialidade', (req,res)=>{
-    dbo.collection('especialidades').find({}).toArray((erro,resultado)=>{
-        if(erro)throw erro
-        res.render('listarEspecialidade', {resultado})
-    })
-})
-
-app.get('/deletarMedico/:id', (req,res)=>{
-    let idMedico = req.params.id
-    let obj_id = new ObjectId(idMedico)
-    dbo.collection('medicos').deleteOne({_id:obj_id}, (erro, resultado)=>{
-        if(erro)throw erro
-        res.redirect('/listarMedicoAdmin')
-    })   
-})
-
-app.get('/deletarEspecialidade/:id', (req,res)=>{
-    let idEspecialidade = req.params.id
-    let obj_id = new ObjectId(idEspecialidade)  
-    dbo.collection('especialidades').deleteOny({_id:obj_id}, (erro, resultado)=>{
-        if(erro)throw erro
-        res.redirect('/listarEspecialidade')
-    })
-    
-})
 
 
 app.listen(porta,()=>{
