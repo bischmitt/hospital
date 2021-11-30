@@ -1,0 +1,74 @@
+
+{{>navUsuario}}
+<section class=" container text-center w-25 my-5">
+    <form action="/addUsuario" method="post">
+        <h3 class="text-success mt-3"><b>Cadastrar Usuário</b></h3>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="nomeUsuario"
+                        id="nomeUsuario" placeholder="Digite seu nome completo" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-calendar2-date-fill"></i></span>
+                    <input type="date" class="form-control border-success border-start-0" name="dataNascimento"
+                        id="dataNascimento" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-123"></i></span>
+                    <input type="number" class="form-control border-success border-start-0" name="cpf" id="cpf"
+                        placeholder="Digite seu CPF 00000000000" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-phone-vibrate-fill"></i></span>
+                    <input type="number" class="form-control border-success border-start-0" name="celular" id="celular"
+                        placeholder="Digite seu celular (00)000000000" required />
+                </div>
+                    <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control border-success border-start-0" name="email" id="email"
+                        placeholder="Digite seu email" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-geo-fill"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="endereco" id="endereco"
+                        placeholder="Digite seu endereço" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-person-bounding-box"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="genero" id="genero"
+                        placeholder="Digite seu gênero" required />
+                    {{!-- Aqui devemos articular com a base de dados da collection especialidade --}}
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-person-circle"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="loginUsuario"
+                        id="loginUsuario" placeholder="Digite um nome de login" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-key-fill"></i></span>
+                    <input type="password" class="form-control border-success border-start-0" name="senha" id="senha"
+                        placeholder="Digite sua senha" required />
+                </div>
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-key-fill"></i></span>
+                    <input type="password" class="form-control border-success border-start-0" name="senhaConfirmar"
+                        id="senhaConfirmar" placeholder="Confirme a sua senha" required />
+                </div>
+                <button type="reset" class="btn btn-outline-success mt-3">Limpar</button>
+                <button type="submit" class="btn btn-success mt-3">Cadastrar</button>
+
+            </div>
+        </div>
+    </form>
+
+</section>

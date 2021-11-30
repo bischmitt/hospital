@@ -1,0 +1,49 @@
+{{>navAdmin}}
+
+<section class="container-fluid text-center my-5">
+  <table border=1 class="table table-bordered border-success">
+    <thead>
+      <th>Identificação</th>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Celular</th>
+      <th>E-mail</th>
+      <th>Endereço</th>
+      <th>Especialidade</th>
+      <th>CRM</th>
+      <th>Salário</th>
+      <th>Valor da Consulta</th>
+      <th>Ações</th>
+    </thead>
+    {{!-- aqui começamos a criar o body da tabela --}}
+    <tbody id="tbody">
+
+      {{!-- //o #each é semelhando foreach que tínhamos no javascrit, ou seja, percorre um array elemento por elemento
+      --}}
+      {{#each resultado}}
+      <tr>
+        {{!-- estamos criando cada coluna com os atributos de cada elemento do array (um a um) --}}
+        <td>{{_id}}</td>
+        <td>{{nomeMedico}}</td>
+        <td>{{cpf}}</td>
+        <td>{{celular}}</td>
+        <td>{{email}}</td>
+        <td>{{endereco}}</td>
+        <td>{{especialidade}}</td>
+        <td>{{crm}}</td>
+        <td>{{salario}}</td>
+        <td>{{precoConsulta}}</td>
+        <td>
+
+          <a href="/deletarMedico/{{_id}}"><i class="bi bi-trash"></i></a>
+          <a href="/editarMedico/{{_id}}"><i class="bi bi-pencil-fill"></i></a>
+          {{!-- atribuimos um link para o botão excluir --}}
+
+        </td>
+
+      </tr>
+      {{!-- aqui fechamos o each --}}
+      {{/each}}
+    </tbody>
+  </table>
+</section>
