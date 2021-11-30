@@ -1,5 +1,6 @@
 
 {{>navUsuario}}
+{{#if admin}}
 <section class=" container text-center w-25 my-5">
     <form action="/addLogin" method="post">
         <h3 class="text-primary mt-3"><b>Login</b></h3>
@@ -17,3 +18,6 @@
         </div>
     </form>
 </section>
+{{else}}
+<h1>acesso negado</h1>
+{{/if}}
