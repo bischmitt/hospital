@@ -12,5 +12,3 @@ async function conectar() {
 }
 conectar()
 module.exports = client
-
-/* Apareça, conexao! */
