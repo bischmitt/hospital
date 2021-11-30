@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col">
                 <div class="input-group mt-3">
-                    <span class="input-group-text border-success border-end-0 "><i
-                            class="bi bi-person-fill"></i></span>
+                    <span class="input-group-text border-success border-end-0 "><i class="bi bi-person-fill"></i></span>
                     <input type="text" class="form-control border-success border-start-0" name="nomeMedico"
-                        id="nomeMedico" placeholder="Nome completo do médico" value="{{resultado.nomeMedico}}" required />
+                        id="nomeMedico" placeholder="Nome completo do médico" value="{{resultado.nomeMedico}}"
+                        required />
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-123"></i></span>
@@ -17,12 +17,14 @@
                         placeholder="CPF do médico 00000000000" value="{{resultado.cpf}}" required />
                 </div>
                 <div class="input-group mt-3">
-                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-phone-vibrate-fill"></i></span>
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-phone-vibrate-fill"></i></span>
                     <input type="number" class="form-control border-success border-start-0" name="celular" id="celular"
                         placeholder="Celular do médico (00)000000000" value="{{resultado.celular}}" required />
                 </div>
                 <div class="input-group mt-3">
-                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-envelope-fill"></i></span>
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-envelope-fill"></i></span>
                     <input type="email" class="form-control border-success border-start-0" name="email" id="email"
                         placeholder="Email do médico" value="{{resultado.email}}" required />
                 </div>
@@ -35,17 +37,13 @@
                 <div class="input-group mt-3">
                     <span class="input-group-text border-success border-end-0 bg-light"><i
                             class="bi bi-suit-heart-fill"></i></span>
-                    <select class="form-select form-constrol border-success border-start-0" name="especialidade" id="especialidade">
-                        <option value="">Selecione uma especialidade</option>
+                    <select class="form-select form-control border-success border-start-0" name="especialidade"
+                        id="especialidade">
+                        <option value="" disabled selected>Selecione uma especialidade</option>
                         {{#each arrayEspecialidade}}
                         <option value="{{_id}}">{{especialidade}}</option>
                         {{/each}}
                     </select>
-
-
-{{!--                     <input type="select" class="form-control border-success border-start-0" name="especialidade"
-                        id="especialidade" placeholder="Especialidade do médico" value="{{resultado.especialidade}}" required /> --}}
-                    {{!-- Aqui devemos articular com a base de dados da collection especialidade. Sugiro puxar da collection especialidades este campo, via select --}}
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text border-success border-end-0 bg-light"><i
@@ -63,7 +61,8 @@
                     <span class="input-group-text border-success border-end-0 bg-light"><i
                             class="bi bi-cash"></i></span>
                     <input type="number" class="form-control border-success border-start-0" name="precoConsulta"
-                        id="precoConsulta" placeholder="Preço da consulta em R$00,00" value="{{resultado.precoConsulta}}" required />
+                        id="precoConsulta" placeholder="Preço da consulta em R$00,00"
+                        value="{{resultado.precoConsulta}}" required />
                 </div>
                 <input type="hidden" name="idMedico" value="{{resultado._id}}">
                 <button type="reset" class="btn btn-outline-success mt-3">Limpar</button>
