@@ -70,7 +70,7 @@ app.post('/addMedico', (req, res) => {
 app.get('/listarMedicoAdmin', (req, res) => {
     dbo.collection('medicos').find({}).toArray((erro, resultado) => {
         if (erro) throw erro
-        res.render('listarMedicoAdmin', { resultado })
+        res.render('listarMedicoAdmin', { resultado})
     })
 })
 
@@ -188,7 +188,9 @@ app.get('/login', (req, res) => {
 })
 
 
+
 app.listen(porta, () => {
     console.log('Vamos arrasar neste projeto!')
 })
-//lalalalalalalalalalal
+
+
