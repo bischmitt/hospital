@@ -35,8 +35,16 @@
                 <div class="input-group mt-3">
                     <span class="input-group-text border-success border-end-0 bg-light"><i
                             class="bi bi-suit-heart-fill"></i></span>
-                    <input type="select" class="form-control border-success border-start-0" name="especialidade"
-                        id="especialidade" placeholder="Especialidade do médico" value="{{resultado.especialidade}}" required />
+                    <select class="form-select form-constrol border-success border-start-0" name="especialidade" id="especialidade">
+                        <option value="">Selecione uma especialidade</option>
+                        {{#each arrayEspecialidade}}
+                        <option value="{{_id}}">{{especialidade}}</option>
+                        {{/each}}
+                    </select>
+
+
+{{!--                     <input type="select" class="form-control border-success border-start-0" name="especialidade"
+                        id="especialidade" placeholder="Especialidade do médico" value="{{resultado.especialidade}}" required /> --}}
                     {{!-- Aqui devemos articular com a base de dados da collection especialidade. Sugiro puxar da collection especialidades este campo, via select --}}
                 </div>
                 <div class="input-group mt-3">

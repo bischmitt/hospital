@@ -24,39 +24,47 @@ app.get('/', (req, res) => {
 /* AQUI COMEÇA O CRUD DO CADASTRAR MÉDICO */
 app.get('/cadastrarMedico', (req, res) => {
     let acao = 'Cadastrar'
-    res.render('cadastrarMedico', { acao })
+    dbo.collection('especialidades').find({}).toArray((erro, arrayEspecialidade) => {
+        if (erro) throw erro
+        res.render('cadastrarMedico', { acao, arrayEspecialidade })
+    })
 })
 
 app.post('/addMedico', (req, res) => {
-    const novoMedico = {
-        nomeMedico: req.body.nomeMedico,
-        cpf: req.body.cpf,
-        celular: req.body.celular,
-        email: req.body.email,
-        endereco: req.body.cpf,
-        especialidade: req.body.especialidade,
-        crm: req.body.crm,
-        salario: req.body.salario,
-        precoConsulta: req.body.precoConsulta
-    }
+    let idEspecialidade = new ObjectId(req.body.especialidade)
+    dbo.collection('especialidades').findOne({ _id: idEspecialidade }, (erro, resultado) => {
+        if (erro) throw erro
 
-    if (req.body.idMedico == "") {
-        dbo.collection('medicos').insertOne(novoMedico, (erro, resultado) => {
-            if (erro) throw erro
-            console.log("Um médico foi cadastrado!")
-            res.redirect('/cadastrarMedico')
-        })
-    } else {
-        const idMedico = req.body.idMedico
-        const objMedico = new ObjectId(idMedico)
-        dbo.collection('medicos').findOneAndReplace(
-            { _id: objMedico },
-            novoMedico,
-            (erro, resultado) => {
+        const novoMedico = {
+            nomeMedico: req.body.nomeMedico,
+            cpf: req.body.cpf,
+            celular: req.body.celular,
+            email: req.body.email,
+            endereco: req.body.cpf,
+            especialidade: resultado,
+            crm: req.body.crm,
+            salario: req.body.salario,
+            precoConsulta: req.body.precoConsulta
+        }
+
+        if (req.body.idMedico == "") {
+            dbo.collection('medicos').insertOne(novoMedico, (erro, resultado) => {
                 if (erro) throw erro
+                console.log("Um médico foi cadastrado!")
+                res.redirect('/cadastrarMedico')
             })
-        res.redirect('/listarMedicoAdmin')
-    }
+        } else {
+            const idMedico = req.body.idMedico
+            const objMedico = new ObjectId(idMedico)
+            dbo.collection('medicos').findOneAndReplace(
+                { _id: objMedico },
+                novoMedico,
+                (erro, resultado) => {
+                    if (erro) throw erro
+                })
+            res.redirect('/listarMedicoAdmin')
+        }
+    })
 })
 
 app.get('/listarMedicoAdmin', (req, res) => {
@@ -90,7 +98,7 @@ app.get('/editarMedico/:id', (req, res) => {
 /* AQUI COMEÇA O CRUD DE CADASTRAR ESPECIALIDADE */
 app.get('/cadastrarEspecialidade', (req, res) => {
     let acao = "Cadastrar"
-    res.render('cadastrarEspecialidade',{acao})
+    res.render('cadastrarEspecialidade', { acao })
 })
 
 app.post('/addEspecialidade', (req, res) => {
