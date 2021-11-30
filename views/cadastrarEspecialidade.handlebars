@@ -1,0 +1,17 @@
+
+{{>navAdmin}}
+<section class=" container text-center w-25 my-5">
+    <form action="/addEspecialidade" method="post">
+        <h3 class="text-success mt-3"><b>Cadastrar Especialidade</b></h3>
+            <div class="col">
+                <div class="input-group mt-3">
+                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-suit-heart-fill"></i></span>
+                    <input type="text" class="form-control border-success border-start-0" name="especialidade"
+                        id="especialidade" placeholder="Digite uma especialidade" value="{{resultado.especialidade}}" required />
+                </div>
+                <input type="hidden" name="idEspecialidade" value="{{resultado._id}}">
+                <button type="reset" class="btn btn-outline-success mt-3">Limpar</button>
+                <button type="submit" class="btn btn-success mt-3">{{acao}}</button>
+            </div>
+    </form>
+</section>

@@ -1,0 +1,32 @@
+
+{{>navAdmin}}
+
+<section class="container text-center my-5">
+        <table border=1 class="table table-bordered border-success">
+          <thead>
+            <th>Identificação</th>
+            <th>Especialiade</th>
+            <th>Ações</th>
+          </thead>
+         {{!-- aqui começamos a criar o body da tabela --}}
+          <tbody id="tbody">
+
+              {{!-- //o #each é semelhando foreach que tínhamos no javascrit, ou seja, percorre um array elemento por elemento --}}
+              {{#each resultado}}
+              <tr>
+                  {{!-- estamos criando cada coluna com os atributos de cada elemento do array (um a um) --}}
+                  <td>{{_id}}</td>
+                  <td>{{especialidade}}</td>
+                  
+                  <td>
+                      <a href="/editarEspecialidade/{{_id}}"><i class="bi bi-pencil-fill"></i></a>
+                      {{!-- atribuimos um link para o botão excluir --}}
+                      <a href="/deletarEspecialidade/{{_id}}"><i class="bi bi-trash"></i></a>
+                  </td>
+                  
+              </tr>
+              {{!-- aqui fechamos o each --}}
+              {{/each}}
+          </tbody>
+        </table>
+    </section>
