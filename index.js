@@ -1,13 +1,19 @@
 const express = require('express')
 const app = express()
-const client = require('./conexao')
-const dbo = client.db('hospital')
+const mongoose = require('mongoose')
 const porta = 3000
+
+mongoose.connect('mongodb+srv://bianca:bianca98@cluster0.jnnvj.mongodb.net/MyDoc?retryWrites=true&w=majority',{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+}).then(()=>{
+console.log('Estamos conectadas ao Banco de Dados')
+})
+
 const exphbs = require('express-handlebars')
 const hbs = exphbs.create({
     partialsDir: 'views/partials',
 });
-const ObjectId = require('mongodb').ObjectId;
 
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
@@ -15,84 +21,21 @@ app.set('view engine', 'handlebars')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static('/public'))
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     res.render('home')
-})
+}) */
 
-/* AQUI COMEÇA O CRUD DO CADASTRAR MÉDICO */
-app.get('/cadastrarMedico', (req, res) => {
-    let acao = 'Cadastrar'
-    dbo.collection('especialidades').find({}).toArray((erro, arrayEspecialidade) => {
-        if (erro) throw erro
-        res.render('cadastrarMedico', { acao, arrayEspecialidade })
-    })
-})
 
-app.post('/addMedico', (req, res) => {
-    let idEspecialidade = new ObjectId(req.body.especialidade)
-    dbo.collection('especialidades').findOne({ _id: idEspecialidade }, (erro, resultado) => {
-        if (erro) throw erro
+/* Rotas */
+/* Médicos */
+const medico_routers = require('./routers/medico_routers')
+app.use('/medicos', medico_routers)
 
-        const novoMedico = {
-            nomeMedico: req.body.nomeMedico,
-            cpf: req.body.cpf,
-            celular: req.body.celular,
-            email: req.body.email,
-            endereco: req.body.cpf,
-            especialidade: resultado,
-            crm: req.body.crm,
-            salario: req.body.salario,
-            precoConsulta: req.body.precoConsulta
-        }
-
-        if (req.body.idMedico == "") {
-            dbo.collection('medicos').insertOne(novoMedico, (erro, resultado) => {
-                if (erro) throw erro
-                console.log("Um médico foi cadastrado!")
-                res.redirect('/cadastrarMedico')
-            })
-        } else {
-            const idMedico = req.body.idMedico
-            const objMedico = new ObjectId(idMedico)
-            dbo.collection('medicos').findOneAndReplace(
-                { _id: objMedico },
-                novoMedico,
-                (erro, resultado) => {
-                    if (erro) throw erro
-                })
-            res.redirect('/listarMedicoAdmin')
-        }
-    })
-})
-
-app.get('/listarMedicoAdmin', (req, res) => {
-    dbo.collection('medicos').find({}).toArray((erro, resultado) => {
-        if (erro) throw erro
-        res.render('listarMedicoAdmin', { resultado})
-    })
-})
-
-app.get('/deletarMedico/:id', (req, res) => {
-    let idMedico = req.params.id
-    let obj_id = new ObjectId(idMedico)
-    dbo.collection('medicos').deleteOne({ _id: obj_id }, (erro, resultado) => {
-        if (erro) throw erro
-        res.redirect('/listarMedicoAdmin')
-    })
-})
-
-app.get('/editarMedico/:id', (req, res) => {
-    const idMedico = req.params.id
-    const obj_id = new ObjectId(idMedico)
-    let acao = "Salvar"
-    dbo.collection('medicos').findOne({ _id: obj_id }, (erro, resultado) => {
-        if (erro) throw erro
-        res.render('cadastrarMedico', { resultado, acao })
-    })
-})
-/* AQUI TERMINA O CRUD DE CADASTRAR MÉDICO */
+/* Login */
+const login_routers = require('./routers/login_routers')
+app.use('/login', login_routers)
 
 
 /* AQUI COMEÇA O CRUD DE CADASTRAR ESPECIALIDADE */
@@ -152,41 +95,6 @@ app.get('/editarEspecialidade/:id', (req, res) => {
 })
 
 /* AQUI TERMINA O CRUD DE CADASTRAR ESPECIALIDADE */
-
-
-app.get('/cadastrarUsuario', (req, res) => {
-    res.render('cadastrarUsuario')
-})
-
-app.post('/addUsuario', (req, res) => {
-    const novoUsuario = {
-        nome: req.body.nomeUsuario,
-        dataNascimento: req.body.dataNascimento,
-        cpf: req.body.cpf,
-        celular: req.body.celular,
-        email: req.body.email,
-        endereco: req.body.endereco,
-        genero: req.body.genero,
-        senha: req.body.senha
-    }
-    dbo.collection('usuarios').insertOne(novoUsuario, (erro, resultado) => {
-        if (erro) throw erro
-        console.log("Um usuário foi cadastrado!")
-        res.redirect('/')
-    })
-})
-
-app.get('/listarMedico', (req, res) => {
-    dbo.collection('medicos').find({}).toArray((erro, resultado) => {
-        if (erro) throw erro
-        res.render('listarMedico', { resultado })
-    })
-})
-
-app.get('/login', (req, res) => {
-    res.render('login')
-})
-
 
 
 app.listen(porta, () => {
