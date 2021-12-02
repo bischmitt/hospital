@@ -1,10 +1,13 @@
 const medicosDB = require('../models/medicos_model')
 const especialidadesDB = require('../models/especialidades_model')
+const mongoose = require('mongoose')
 
 exports.cadastrarMedicoGet = (req, res) => {
     let acao = "Cadastrar"
-    const resultado = []
-    res.render('views/pages/cadastrarMedico', { resultado, acao })
+    especialidadesDB.find({},(erro,arrayEspecialidade)=>{
+        if (erro) throw erro
+        res.render('views/pages/cadastrarMedico', { acao, arrayEspecialidade })
+    }).lean()  
 }
 
 exports.cadastrarMedicoPost = (req, res) => {
@@ -24,13 +27,13 @@ exports.cadastrarMedicoPost = (req, res) => {
             salva_medico.salario = req.body.salario
             salva_medico.precoConsulta = req.body.precoConsulta
 
-            salva_funcionario.save((erro) => {
+            salva_medico.save((erro) => {
                 if (erro) throw erro
-                res.redirect('/listarMedicoAdmin')
+                res.redirect('/medicos/listarAdmin')
             })
 
         } else {
-            const id = req.body.idMedico
+            const id = mongoose.Types.ObjectId(req.body.idMedico)
             medicosDB.findById(id, (erro, resultado) => {
                 if (erro) throw erro
 
@@ -46,7 +49,7 @@ exports.cadastrarMedicoPost = (req, res) => {
 
                 resultado.save((erro) => {
                     if (erro) throw erro
-                    res.redirect('/listarMedicoAdmin')
+                    res.redirect('/medicos/listarAdmin')
                 })
             })
         }
@@ -57,7 +60,7 @@ exports.listarMedicoAdmin = (req, res) => {
     medicosDB.find({},(erro, resultado) => {
         if (erro) throw erro
         res.render('views/pages/listarMedicoAdmin', { resultado })
-    })
+    }).lean()
 }
 
 exports.listarMedicoUser = (req, res) => {
@@ -68,19 +71,21 @@ exports.listarMedicoUser = (req, res) => {
 }
 
 exports.deletarMedico = (req, res) => {
-    let idMedico = req.params.id
+    let idMedico = mongoose.Types.ObjectId(req.params.id)
     /* let obj_id = new ObjectId(idMedico) */
     medicosDB.deleteOne({ _id: idMedico }, (erro, resultado) => {
         if (erro) throw erro
-        res.redirect('/listarMedicoAdmin')
+        res.redirect('/medicos/listarAdmin')
     })
 }
 
 exports.editarMedico = (req, res) => {
-    const idMedico = req.params.id
+    let idMedico = mongoose.Types.ObjectId(req.params.id)
+    // const idMedico = req.params.id
     let acao = "Salvar"
     medicosDB.findById(idMedico , (erro, resultado) => {
         if (erro) throw erro
+        console.log(resultado)
         res.render('views/pages/cadastrarMedico', { resultado, acao })
-    })
+    }).lean()
 }

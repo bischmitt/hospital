@@ -6,7 +6,7 @@ const Medicos = mongoose.model('medicos', {
     celular: String,
     email: String,
     endereco: String,
-    especialidade: Array,
+    especialidade: Object,
     crm: String,
     salario: String,
     precoConsulta: String
