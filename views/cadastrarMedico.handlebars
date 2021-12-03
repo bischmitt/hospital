@@ -38,8 +38,8 @@
                     <span class="input-group-text border-success border-end-0 bg-light"><i
                             class="bi bi-suit-heart-fill"></i></span>
                     <select class="form-select form-control border-success border-start-0" name="especialidade"
-                        id="especialidade">
-                        <option value="" disabled selected>Selecione uma especialidade</option>
+                        id="especialidade" required>
+                        <option value="{{resultado.especialidade._id}}" disabled selected>{{resultado.especialidade.especialidade}}</option>
                         {{#each arrayEspecialidade}}
                         <option value="{{_id}}">{{especialidade}}</option>
                         {{/each}}
