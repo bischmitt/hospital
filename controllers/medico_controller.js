@@ -4,10 +4,10 @@ const mongoose = require('mongoose')
 
 exports.cadastrarMedicoGet = (req, res) => {
     let acao = "Cadastrar"
-    especialidadesDB.find({},(erro,arrayEspecialidade)=>{
+    especialidadesDB.find({}, (erro, arrayEspecialidade) => {
         if (erro) throw erro
         res.render('views/pages/cadastrarMedico', { acao, arrayEspecialidade })
-    }).lean()  
+    }).lean()
 }
 
 exports.cadastrarMedicoPost = (req, res) => {
@@ -57,16 +57,16 @@ exports.cadastrarMedicoPost = (req, res) => {
 }
 
 exports.listarMedicoAdmin = (req, res) => {
-    medicosDB.find({},(erro, resultado) => {
+    medicosDB.find({}, (erro, resultado) => {
         if (erro) throw erro
         res.render('views/pages/listarMedicoAdmin', { resultado })
     }).lean()
 }
 
 exports.listarMedicoUser = (req, res) => {
-    medicosDB.find({},(erro, resultado) => {
+    medicosDB.find({}, (erro, resultado) => {
         if (erro) throw erro
-        res.render('listarMedico', { resultado })
+        res.render('views/pages/listarMedico', { resultado })
     })
 }
 
@@ -81,11 +81,15 @@ exports.deletarMedico = (req, res) => {
 
 exports.editarMedico = (req, res) => {
     let idMedico = mongoose.Types.ObjectId(req.params.id)
-    // const idMedico = req.params.id
+    /* const idMedico = req.params.id */
     let acao = "Salvar"
-    medicosDB.findById(idMedico , (erro, resultado) => {
+    especialidadesDB.find({}, (erro, arrayEspecialidade) => {
+        console.log(arrayEspecialidade)
         if (erro) throw erro
-        console.log(resultado)
-        res.render('views/pages/cadastrarMedico', { resultado, acao })
+        medicosDB.findOne({_id: idMedico}, (erro, resultado) => {
+            if (erro) throw erro
+            res.render('views/pages/cadastrarMedico', { resultado, acao, arrayEspecialidade })
+        }).lean()
     }).lean()
 }
+
