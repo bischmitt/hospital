@@ -1,4 +1,22 @@
+{{#if falha}}
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Acesso Negado!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <small>Usuário e/ou senha Inválidos</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+{{/if}}
 <section class=" container text-center w-25 my-5 border border-2 p-5">
     <form action="/addLogin" method="post">
         <h1 class="text-success mt-3"><b>Login</b></h1>

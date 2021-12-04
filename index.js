@@ -155,7 +155,9 @@ app.post("/addLogin", (req, res)=>{
     dbo.collection("usuarios").findOne({email:usuario}, (erro, resultado)=>{
         if(erro)throw erro
         if(resultado == null || !(resultado.senha == senha)){
-            res.send("Usuário e/ou senha Inválidos")
+            falha = 1
+            res.render('login',{falha})
+
         }
         else{
             global.statusUser = resultado.status
