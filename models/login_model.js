@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+/* const mongoose = require('mongoose')
 
 const Login = mongoose.model('login',{
     usuario:String,
@@ -7,4 +7,4 @@ const Login = mongoose.model('login',{
 
 })
 
-module.exports = Login
+module.exports = Login */

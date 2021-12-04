@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+/* const mongoose = require('mongoose')
 const Medicos = mongoose.model('medicos', {
 
     nomeMedico: String,
@@ -13,4 +13,4 @@ const Medicos = mongoose.model('medicos', {
 
 })
 
-module.exports = Medicos
+module.exports = Medicos */

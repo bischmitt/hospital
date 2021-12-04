@@ -1,4 +1,4 @@
-const express = require('express')
+/* const express = require('express')
 const router = express.Router()
 
 const medicoController = require('../controllers/medico_controller')
@@ -18,3 +18,4 @@ router.get('/deletar/:id', medicoController.deletarMedico)
 router.get('/editar/:id', medicoController.editarMedico)
 
 module.exports = router
+ */

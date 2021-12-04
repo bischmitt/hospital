@@ -1,4 +1,4 @@
-const loginDB = require('../models/login_model')
+/* const loginDB = require('../models/login_model')
 const mongoose = require("mongoose")
 
 exports.acessarLoginGet = (req, res) => {
@@ -29,3 +29,4 @@ exports.acessarLoginPost = (req, res) => {
     
 }
 
+ */
