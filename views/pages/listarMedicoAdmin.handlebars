@@ -1,19 +1,32 @@
-{{>navAdmin}}
+{{>nav}}
 
-<section class="container-fluid text-center my-5">
+<section class="container-fluid w-75 text-center my-5">
+  <h1 class="text-success mt-3 h3"><b>Pesquisar Médicos e Especialidades</b></h1>
+  <div class="m-auto d-flex my-5  justify-content-center ">
+    <div class="input-group me-3 w-50">
+      <input type="search" class="form-control border-success border-end-0" id="pesquisa"
+        placeholder="Pesquise o nome de um médico ou especialidade" aria-label="Search" onkeyup="pesquisarMedico()">
+      <span class="input-group-text border-success border-start-0 bg-light"><i
+        class="bi bi-search text-success"></i></span>
+    </div>
+    <div>
+      <a href="/cadastrarMedico" class="btn btn-success m-auto">Cadastrar Médico</a>
+    </div>
+  </div>
 
-  <table border=1 class="table table-bordered border-success">
+  <table id='tabela' class="table table-bordered border-success">
     <thead>
-      <th>Identificação</th>
+      
       <th>Nome</th>
+      <th>Especialidade</th>
       <th>CPF</th>
       <th>Celular</th>
       <th>E-mail</th>
       <th>Endereço</th>
-      <th>Especialidade</th>
       <th>CRM</th>
       <th>Salário</th>
       <th>Valor da Consulta</th>
+      <th>Identificação</th>
       <th>Ações</th>
     </thead>
     {{!-- aqui começamos a criar o body da tabela --}}
@@ -24,16 +37,17 @@
       {{#each resultado}}
       <tr>
         {{!-- estamos criando cada coluna com os atributos de cada elemento do array (um a um) --}}
-        <td>{{_id}}</td>
+        
         <td>{{nomeMedico}}</td>
+        <td>{{especialidade.especialidade}}</td>
         <td>{{cpf}}</td>
         <td>{{celular}}</td>
         <td>{{email}}</td>
         <td>{{endereco}}</td>
-        <td>{{especialidade.especialidade}}</td>
         <td>{{crm}}</td>
         <td>{{salario}}</td>
         <td>{{precoConsulta}}</td>
+        <td>{{_id}}</td>
         <td>
 
           <a href="/medicos/deletar/{{_id}}"><i class="bi bi-trash"></i></a>
