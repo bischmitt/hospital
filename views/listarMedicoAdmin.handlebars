@@ -4,7 +4,7 @@
   <h1 class="text-success mt-3 h3"><b>Pesquisar Médicos e Especialidades</b></h1>
   <div class="m-auto d-flex my-5  justify-content-center ">
     <div class="input-group me-3 w-50">
-      <input type="search" class="form-control border-success border-end-0" id="pesquisa"
+      <input class="form-control border-success border-end-0" id="pesquisa"
         placeholder="Pesquise o nome de um médico ou especialidade" aria-label="Search" onkeyup="pesquisarMedico()">
       <span class="input-group-text border-success border-start-0 bg-light"><i
         class="bi bi-search text-success"></i></span>
@@ -14,9 +14,9 @@
     </div>
   </div>
 
-  <table id='tabela' class="table table-bordered border-success">
+  <table id='tabela' class="table table-bordered border-success ">
     <thead>
-      
+  
       <th>Nome</th>
       <th>Especialidade</th>
       <th>CPF</th>
@@ -50,8 +50,8 @@
         <td>{{_id}}</td>
         <td>
 
-          <a href="/deletarMedico/{{_id}}"><i class="bi bi-trash"></i></a>
-          <a href="/editarMedico/{{_id}}"><i class="bi bi-pencil-fill"></i></a>
+          <a href="/deletarMedico/{{_id}}"><i class="bi bi-trash text-danger fs-4"></i></a>
+          <a href="/editarMedico/{{_id}}"><i class="bi bi-pencil-fill text-success fs-4"></i></a>
           {{!-- atribuimos um link para o botão excluir --}}
 
         </td>

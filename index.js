@@ -6,24 +6,26 @@ const porta = 3000
 
 global.statusUser = -1
 
-const {eAdmin} = {
-    eAdmin: function(req, res, next){
-        if(global.statusUser == 0 ){
+const { eAdmin } = {
+    eAdmin: function (req, res, next) {
+        let status = 'administrador'
+        if (global.statusUser == 0) {
             return next()
-       }
-        else{
-            res.send("Você deve ser um administrador para acessar essa página")
+        }
+        else {
+            res.render('alerta', { status })
         }
     }
 }
 
-const {eUser} = {
-    eUser: function(req, res, next){
-        if(global.statusUser >= 0){
+const { eUser } = {
+    eUser: function (req, res, next) {
+        let status = 'usuário'
+        if (global.statusUser >= 0) {
             return next()
         }
-        else{
-            res.send("Você deve estar logado como usuário comum para acessar essa página")
+        else {
+            res.render('alerta', { status })
         }
     }
 }
@@ -34,7 +36,7 @@ const hbs = exphbs.create({
 });
 // const ObjectId = require('mongodb').ObjectId;
 // const mongoose = require('mongoose')
-const {ObjectId} = require('bson')
+const { ObjectId } = require('bson')
 
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
@@ -97,7 +99,7 @@ app.post('/addMedico', eAdmin, (req, res) => {
 app.get('/listarMedicoAdmin', eAdmin, (req, res) => {
     dbo.collection('medicos').find({}).toArray((erro, resultado) => {
         if (erro) throw erro
-        res.render('listarMedicoAdmin', { resultado})
+        res.render('listarMedicoAdmin', { resultado })
     })
 })
 
@@ -126,7 +128,7 @@ app.get('/editarMedico/:id', eAdmin, (req, res) => {
 })
 /* AQUI TERMINA O CRUD DE CADASTRAR MÉDICO */
 
-app.get('/listarMedico',eUser, (req, res) => {
+app.get('/listarMedico', eUser, (req, res) => {
     dbo.collection('medicos').find({}).toArray((erro, resultado) => {
         if (erro) throw erro
         res.render('listarMedico', { resultado })
@@ -138,28 +140,28 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
-app.post("/addLogin", (req, res)=>{
+app.post("/addLogin", (req, res) => {
 
     const usuario = req.body.loginUsuario
     const senha = req.body.senha
 
-    dbo.collection("usuarios").findOne({email:usuario}, (erro, resultado)=>{
-        if(erro)throw erro
-        if(resultado == null || !(resultado.senha == senha)){
+    dbo.collection("usuarios").findOne({ email: usuario }, (erro, resultado) => {
+        if (erro) throw erro
+        if (resultado == null || !(resultado.senha == senha)) {
             falha = 1
-            res.render('login',{falha})
+            res.render('login', { falha })
 
         }
-        else{
+        else {
             global.statusUser = resultado.status
-            if (resultado.status == 0){
+            if (resultado.status == 0) {
                 res.redirect("/listarMedicoAdmin")
             }
-            else if(resultado.status>0){
+            else if (resultado.status > 0) {
                 res.redirect("/listarMedico")
             }
         }
-        
+
     })
 })
 
