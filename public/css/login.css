@@ -18,12 +18,12 @@ body{
     background-color:#ffff;
     border: 3px groove #ffff;
     border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.4) 5px 5px 15px, rgba(21, 117, 85, 0.329) 0px 5px 20px -3px, rgba(0, 0, 0, 0.2) -2px -2px 5px inset;
+    box-shadow: rgba(0, 0, 0, 0.4) 7px 7px 15px, rgba(21, 117, 85, 0.329) 0px 5px 20px -3px, rgba(0, 0, 0, 0.2) -2px -2px 5px inset;
     padding: 1rem;
 }
   
 .login:hover{
-    box-shadow: rgba(23, 31, 28, 0.438) 5px 5px 15px, rgba(21, 117, 85, 0.726) 0px 5px 20px -3px, rgba(0, 0, 0, 0.2) -2px -2px 5px inset;
+    box-shadow: rgba(23, 31, 28, 0.438) 8px 8px 10px, rgba(21, 117, 85, 0.726) 0px 5px 20px -3px, rgba(0, 0, 0, 0.2) -2px -2px 5px inset;
 }
 
 img{
