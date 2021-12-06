@@ -1,12 +1,12 @@
-
 {{>nav}}
 <section class=" container text-center w-25 my-5">
-    <form action="/addMedico" method="post" id="formContato" name="insira" >
+    <form action="/addMedico" method="post" id="formContato" name="insira">
         <h1 class="h3 text-success mt-3"><b>Cadastrar Médico</b></h1>
         <div class="row">
             <div class="col">
                 <div class="input-group mt-3">
-                    <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-person-fill"></i></span>
+                    <span class="input-group-text border-success border-end-0 bg-light"><i
+                            class="bi bi-person-fill"></i></span>
                     <input type="text" class="form-control border-success border-start-0" name="nomeMedico"
                         id="nomeMedico" placeholder="Nome completo do médico" value="{{resultado.nomeMedico}}"
                         required />
@@ -14,7 +14,8 @@
                 <div class="input-group mt-3">
                     <span class="input-group-text border-success border-end-0 bg-light"><i class="bi bi-123"></i></span>
                     <input type="text" class="form-control border-success border-start-0" name="cpf" id="cpf"
-                        placeholder="CPF do médico 00000000000" value="{{resultado.cpf}}" onblur="return validarCPF(this)" required />
+                        placeholder="CPF do médico 00000000000" value="{{resultado.cpf}}"
+                        onblur="return validarCPF(this)" required />
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text border-success border-end-0 bg-light"><i
@@ -39,7 +40,8 @@
                             class="bi bi-suit-heart-fill"></i></span>
                     <select class="form-select form-control border-success border-start-0" name="especialidade"
                         id="especialidade" required>
-                        <option value="{{resultado.especialidade._id}}" disabled selected>{{resultado.especialidade.especialidade}}</option>
+                        <option value="{{resultado.especialidade._id}}" disabled selected>
+                            {{resultado.especialidade.especialidade}}</option>
                         {{#each arrayEspecialidade}}
                         <option value="{{_id}}">{{especialidade}}</option>
                         {{/each}}
@@ -64,11 +66,13 @@
                         id="precoConsulta" placeholder="Preço da consulta em R$00,00"
                         value="{{resultado.precoConsulta}}" required />
                 </div>
-                <input type="hidden" name="idMedico" value="{{resultado._id}}">
-                <button type="reset" class="btn btn-outline-success mt-3 mx-3">Limpar</button>
-                <a href="/listarMedicoAdmin" class="btn btn-outline-success mt-3">Listar</a>
-                <button type="submit" name="submit" class="btn btn-success mt-3 mx-3">{{acao}}</button>
 
+                <div class="d-flex justify-content-center">
+                    <input type="hidden" name="idMedico" value="{{resultado._id}}">
+                    <button type="reset" class="btn btn-outline-success mt-3 mx-3">Limpar</button>
+                    <a href="/listarMedicoAdmin" class="btn btn-outline-success mt-3">Listar</a>
+                    <button type="submit" name="submit" class="btn btn-success mt-3 mx-3">{{acao}}</button>
+                </div>
             </div>
         </div>
     </form>
