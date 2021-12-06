@@ -8,7 +8,7 @@ global.statusUser = -1
 
 const { eAdmin } = {
     eAdmin: function (req, res, next) {
-        let status = 'administrador'
+        let status = 'como administrador'
         if (global.statusUser == 0) {
             return next()
         }
@@ -20,7 +20,7 @@ const { eAdmin } = {
 
 const { eUser } = {
     eUser: function (req, res, next) {
-        let status = 'usuário'
+        let status = ''
         if (global.statusUser >= 0) {
             return next()
         }

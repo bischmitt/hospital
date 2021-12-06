@@ -14,9 +14,9 @@
     </div>
   </div>
 
-  <table id='tabela' class="table-sm text-sm border-success text-center table-hover">
-    <thead class="bg-success text-light" >
-  
+<div class="table-responsive">
+  <table id='tabela' class="table text-sm border-success align-middle text-center table-hover">
+    <thead class="bg-success align-middle text-light" >
       <th>Nome</th>
       <th>Especialidade</th>
       <th>CPF</th>
@@ -48,9 +48,9 @@
         <td>{{salario}}</td>
         <td>{{precoConsulta}}</td>
         <td>{{_id}}</td>
-        <td>
+        <td class=" ">
 
-          <a href="/deletarMedico/{{_id}}"><i class="bi bi-trash text-danger fs-4"></i></a>
+          <a href="/deletarMedico/{{_id}}"><i class="bi bi-trash text-danger fs-4 bg-image hover-overlay"></i></a>
           <a href="/editarMedico/{{_id}}"><i class="bi bi-pencil-fill text-success fs-4"></i></a>
           {{!-- atribuimos um link para o botão excluir --}}
 
@@ -61,4 +61,5 @@
       {{/each}}
     </tbody>
   </table>
+  </div>
 </section>
