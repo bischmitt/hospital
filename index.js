@@ -4,8 +4,10 @@ const client = require('./conexao')
 const dbo = client.db('hospital')
 const porta = 3000
 
+/* Variável global */
 global.statusUser = -1
 
+/* Função para para o status = 0 (administrador) */
 const { eAdmin } = {
     eAdmin: function (req, res, next) {
         let status = 'como administrador'
@@ -18,6 +20,7 @@ const { eAdmin } = {
     }
 }
 
+/* Função para o status = 1 (usuário comum) */
 const { eUser } = {
     eUser: function (req, res, next) {
         let status = ''

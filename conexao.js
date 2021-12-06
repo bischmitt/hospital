@@ -1,4 +1,4 @@
-/* conexão com o banco de dados */
+/* Conexão com o banco de dados */
 const mongodb = require('mongodb').MongoClient
 const url = 'mongodb+srv://bianca:bianca98@cluster0.jnnvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const client = new mongodb(url)
@@ -12,4 +12,5 @@ async function conectar() {
     }
 }
 conectar()
+/* Exportação para o index.js */
 module.exports = client
